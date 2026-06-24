@@ -113,10 +113,7 @@ document.getElementById(
 "nameError"
 );
 
-const easyHintBanner =
-document.getElementById(
-"easyHintBanner"
-);
+
 
 /* =====================================================
    AUDIO
@@ -219,9 +216,7 @@ function startGameplayMusic(){
     .catch(()=>{});
 }
 
-// Popupbanner
-easyHintBanner.style.display =
-"block";
+
 
 /* =====================================================
    BOARD CREATION
@@ -410,6 +405,22 @@ function renderBoard(){
         
     });
     showHints();
+    if(
+    gameState.mode === "single" &&
+    gameState.difficulty === "easy" &&
+    gameState.moveCount === 0
+){
+
+    board.classList.add(
+    "tutorial-active"
+    );
+
+}else{
+
+    board.classList.remove(
+    "tutorial-active"
+    );
+}
 
     gameState.blocked
     .forEach(block=>{
@@ -523,11 +534,7 @@ function executeMove(row,col){
     if(
     gameState.mode === "single" &&
     gameState.difficulty === "easy"
-){
-
-    easyHintBanner.style.display =
-    "none";
-}
+)
 
 
     if(gameState.gameOver)

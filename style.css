@@ -1040,27 +1040,34 @@ button:disabled{
         rotate(360deg);
     }
 }
+#board{
 
-/* Tutorial Popup */
-#easyHintBanner{
+    position:relative;
+}
 
-    display:none;
+#board.tutorial-active::before{
 
-    width:auto;
+    content:
+    "👆 Tap a green dotted square to move";
 
-    max-width:650px;
+    position:absolute;
 
-    margin:10px auto 15px auto;
+    left:50%;
+    top:50%;
 
-    padding:10px 16px;
+    transform:
+    translate(-50%,-50%);
 
-    background:#E8F8EC;
+    background:
+    rgba(255,255,255,0.95);
+
+    color:#27AE60;
 
     border:2px dashed #27AE60;
 
-    color:#1E8449;
+    padding:12px 18px;
 
-    border-radius:10px;
+    border-radius:12px;
 
     font-size:14px;
 
@@ -1068,28 +1075,12 @@ button:disabled{
 
     text-align:center;
 
-    line-height:1.4;
+    z-index:50;
 
-    animation:hintPulse 1.5s infinite;
+    pointer-events:none;
 
-    flex:none;
+    max-width:70%;
 }
-
-/* @keyframes hintPulse{
-
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.03);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-} */
-
 
 /* ===================================================
    RESPONSIVE
@@ -1387,3 +1378,14 @@ body{
 }
 
 
+@media screen and (max-width:768px){
+
+    #board.tutorial-active::before{
+
+        font-size:12px;
+
+        padding:8px 12px;
+
+        max-width:80%;
+    }
+}
