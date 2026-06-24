@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0">
+
+<title>Knight Lock</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- =========================
+HOME SCREEN
+========================= -->
+
+<section id="homeScreen">
+
+    <div class="home-card">
+
+        <h1>
+            Knight Lock
+        </h1>
+
+        <p>
+            Strategic Knight Battle
+        </p>
+
+        <div class="mode-buttons">
+
+            <button id="onePlayerBtn">
+                1 Player
+            </button>
+
+            <button id="twoPlayerBtn">
+                2 Players
+            </button>
+
+        </div>
+
+        <div class="secondary-buttons">
+
+            <button id="rulesBtn">
+                Rules
+            </button>
+
+            <button id="musicBtn">
+                🔊 Music
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+DIFFICULTY SCREEN
+========================= -->
+
+<section id="difficultyScreen">
+
+    <div class="difficulty-card">
+
+        <h2>
+            Select Difficulty
+        </h2>
+
+        <button
+        class="difficultyBtn"
+        data-level="easy">
+
+            Easy
+
+        </button>
+
+        <button
+        class="difficultyBtn"
+        data-level="medium">
+
+            Medium
+
+        </button>
+
+        <button
+        class="difficultyBtn"
+        data-level="hard">
+
+            Hard
+
+        </button>
+        
+        <button id="difficultyHomeBtn">
+    Home
+</button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+RULES
+========================= -->
+
+<section id="rulesScreen">
+
+    <div class="rules-card">
+
+        <h2>
+            How To Play
+        </h2>
+
+        <ul>
+
+            <li>
+                Move like a Chess Knight.
+            </li>
+
+            <li>
+                Previous position becomes blocked.
+            </li>
+
+            <li>
+                Blocked positions cannot be reused.
+            </li>
+
+            <li>
+                Last player with a move wins.
+            </li>
+
+            <li>
+                In 1 Player mode,
+                defeat the Bot.
+            </li>
+
+        </ul>
+
+        <button id="closeRules">
+
+            Close
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+GAME SCREEN
+========================= -->
+
+<div id="gameScreen">
+
+    <!-- LEFT PANEL -->
+
+    <aside class="side-panel">
+
+        <h2>
+            Knight Lock
+        </h2>
+
+        <div id="turnIndicator">
+
+            Current Turn
+
+            <span>
+
+                Player 1
+
+            </span>
+
+        </div>
+
+        <div class="players">
+
+            <div
+            class="player
+            blue-player-card">
+
+                <span class="piece">
+
+                    ♘
+
+                </span>
+
+                Player 1
+
+            </div>
+
+            <div
+            class="player
+            red-player-card">
+
+                <span class="piece">
+
+                    ♞
+
+                </span>
+
+                <span id="player2Label">
+
+                    Player 2
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="gameInfo">
+
+            <p>
+
+                Mode:
+                <span id="modeLabel">
+
+                    2 Player
+
+                </span>
+
+            </p>
+
+            <p>
+
+                Difficulty:
+                <span id="difficultyLabel">
+
+                    -
+
+                </span>
+
+            </p>
+
+        </div>
+
+        <button id="restartBtn">
+
+            Restart
+
+        </button>
+
+        <button id="homeBtn">
+
+            Home
+
+        </button>
+
+    </aside>
+
+    <!-- BOARD -->
+
+    <main class="board-wrapper">
+
+        <div id="board">
+
+        </div>
+
+    </main>
+
+    <!-- HISTORY -->
+
+    <aside class="history-panel">
+
+        <!-- <h3>
+
+            Move History
+
+        </h3> -->
+
+        <ul id="moveList">
+
+        </ul>
+
+    </aside>
+
+</div>
+
+<!-- =========================
+WIN SCREEN
+========================= -->
+
+<section id="winScreen">
+
+    <div class="win-card">
+
+        <div class="trophy">
+
+            🏆
+
+        </div>
+
+        <h1 id="winnerText">
+
+            Player Wins
+
+        </h1>
+
+        <button id="playAgain">
+
+            Play Again
+
+        </button>
+
+        <button id="backHome">
+
+            Home
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+AUDIO
+========================= -->
+
+<audio id="introMusic" loop>
+
+    <source
+    src="assets/audio/intro.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+<audio id="gameplayMusic" loop>
+
+    <source
+    src="assets/audio/gameplay.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+<audio id="buttonSound">
+
+    <source
+    src="assets/audio/button.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+<audio id="jumpSound">
+
+    <source
+    src="assets/audio/jump.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+<audio id="blockSound">
+
+    <source
+    src="assets/audio/blocked.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+<audio id="winSound">
+
+    <source
+    src="assets/audio/winning.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+</html>
+

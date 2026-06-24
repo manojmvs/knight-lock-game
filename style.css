@@ -1,0 +1,892 @@
+/* ===================================================
+   KNIGHT LOCK
+   STYLE.CSS
+=================================================== */
+
+:root{
+
+    --blue:#2D7FF9;
+    --blue-dark:#1E5FCC;
+
+    --red:#E74C3C;
+    --red-dark:#C0392B;
+
+    --bg:#F4F6F8;
+    --panel:#FFFFFF;
+    --board:#D9DEE5;
+
+    --text:#2C3E50;
+
+    --shadow:
+    0 8px 24px rgba(0,0,0,.12);
+
+    --radius:18px;
+}
+
+/* ===================================================
+   RESET
+=================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background:var(--bg);
+
+    font-family:'Poppins',sans-serif;
+
+    color:var(--text);
+}
+
+button{
+
+    border:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    transition:.25s;
+}
+
+button:hover{
+
+    transform:
+    translateY(-3px);
+}
+
+/* ===================================================
+   HOME SCREEN
+=================================================== */
+
+#homeScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--blue) 0%,
+    var(--blue) 50%,
+    var(--red) 50%,
+    var(--red) 100%);
+}
+
+.home-card{
+
+    width:520px;
+
+    max-width:90%;
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.25);
+}
+
+.home-card h1{
+
+    font-size:64px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+}
+
+.home-card p{
+
+    color:#777;
+
+    margin-bottom:35px;
+}
+.player-name-section{
+
+    margin-bottom:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.player-name-section input{
+
+    width:100%;
+
+    padding:16px;
+
+    border:2px solid #D9DEE5;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    outline:none;
+
+    transition:.25s;
+}
+
+.player-name-section input:focus{
+
+    border-color:#2D7FF9;
+}
+
+#nameError{
+
+    color:#E74C3C;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    min-height:20px;
+}
+
+.mode-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.mode-buttons button{
+
+    flex:1;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+}
+
+#onePlayerBtn{
+
+    background:var(--blue);
+}
+
+#twoPlayerBtn{
+
+    background:var(--red);
+}
+
+.secondary-buttons{
+
+    display:flex;
+
+    gap:15px;
+}
+
+.secondary-buttons button{
+
+    flex:1;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:600;
+}
+
+#rulesBtn{
+
+    background:#34495E;
+}
+
+#musicBtn{
+
+    background:#2C3E50;
+}
+
+/* ===================================================
+   DIFFICULTY SCREEN
+=================================================== */
+
+#difficultyScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1100;
+
+    background:
+    rgba(0,0,0,.5);
+}
+
+.difficulty-card{
+
+    width:420px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+}
+
+.difficulty-card h2{
+
+    margin-bottom:25px;
+}
+
+.difficultyBtn{
+
+    width:100%;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+}
+
+.difficultyBtn[data-level="easy"]{
+
+    background:#27AE60;
+}
+
+.difficultyBtn[data-level="medium"]{
+
+    background:#F39C12;
+}
+
+.difficultyBtn[data-level="hard"]{
+
+    background:#E74C3C;
+}
+#difficultyHomeBtn{
+
+    width:100%;
+
+    padding:18px;
+
+    margin-top:10px;
+
+    border-radius:12px;
+
+    background:#FFA500;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+#difficultyHomeBtn:hover{
+
+    background:#E67E22;
+
+    transform:translateY(-3px);
+}
+
+/* ===================================================
+   RULES SCREEN
+=================================================== */
+
+#rulesScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1100;
+
+    background:
+    rgba(0,0,0,.55);
+}
+
+.rules-card{
+
+    width:550px;
+
+    max-width:90%;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+}
+
+.rules-card h2{
+
+    text-align:center;
+
+    margin-bottom:20px;
+}
+
+.rules-card ul{
+
+    padding-left:25px;
+
+    line-height:2;
+}
+
+#closeRules{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-top:25px;
+
+    border-radius:12px;
+
+    background:var(--blue);
+
+    color:white;
+
+    font-weight:600;
+}
+
+/* ===================================================
+   GAME SCREEN
+=================================================== */
+
+#gameScreen{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+}
+
+/* ===================================================
+   SIDE PANEL
+=================================================== */
+
+.side-panel{
+
+    width:280px;
+
+    background:white;
+
+    border-right:
+    2px solid #e4e4e4;
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    box-shadow:
+    5px 0 15px rgba(0,0,0,.05);
+}
+
+.side-panel h2{
+
+    text-align:center;
+
+    color:var(--blue);
+}
+
+#turnIndicator{
+
+    background:#DDEBFF;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+    font-weight:600;
+}
+
+#turnIndicator span{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:20px;
+}
+
+.players{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+.player{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px;
+
+    border-radius:14px;
+
+    font-weight:600;
+}
+
+.blue-player-card{
+
+    background:#DDEBFF;
+}
+
+.red-player-card{
+
+    background:#FFE3DD;
+}
+
+.piece{
+
+    font-size:28px;
+}
+
+.gameInfo{
+
+    background:#F4F6F8;
+
+    padding:15px;
+
+    border-radius:14px;
+}
+
+.gameInfo p{
+
+    margin-bottom:8px;
+}
+
+#restartBtn{
+
+    background:var(--blue);
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    font-weight:600;
+}
+
+#homeBtn{
+
+    background:var(--red);
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    font-weight:600;
+}
+
+/* ===================================================
+   BOARD
+=================================================== */
+
+.board-wrapper{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+#board{
+
+    width:min(78vh,78vw);
+
+    height:min(78vh,78vw);
+
+    background:var(--board);
+
+    padding:10px;
+
+    border-radius:22px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(6,1fr);
+
+    grid-template-rows:
+    repeat(6,1fr);
+
+    gap:6px;
+
+    box-shadow:var(--shadow);
+}
+
+.cell{
+
+    background:white;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:50px;
+
+    transition:.2s;
+}
+
+.cell:hover{
+
+    transform:scale(1.04);
+}
+
+/* ===================================================
+   KNIGHTS
+=================================================== */
+
+.blue-player{
+
+    color:var(--blue);
+
+    font-weight:700;
+}
+
+.red-player{
+
+    color:var(--red);
+
+    font-weight:700;
+}
+
+/* ===================================================
+   ACTIVE TURN
+=================================================== */
+
+.active{
+
+    animation:
+    bounce .8s infinite;
+}
+
+@keyframes bounce{
+
+    0%{
+
+        transform:
+        translateY(0);
+    }
+
+    50%{
+
+        transform:
+        translateY(-8px);
+    }
+
+    100%{
+
+        transform:
+        translateY(0);
+    }
+}
+
+/* ===================================================
+   BLOCKS
+=================================================== */
+
+.block-blue{
+
+    background:#F4F8FF;
+}
+
+.block-blue::after{
+
+    content:"✕";
+
+    color:var(--blue);
+
+    font-size:42px;
+
+    font-weight:900;
+}
+
+.block-red{
+
+    background:#FFF4F2;
+}
+
+.block-red::after{
+
+    content:"✕";
+
+    color:var(--red);
+
+    font-size:42px;
+
+    font-weight:900;
+}
+
+/* ===================================================
+   HISTORY
+=================================================== */
+/* 
+.history-panel{
+
+    width:280px;
+
+    background:white;
+
+    border-left:
+    2px solid #e4e4e4;
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.history-panel h3{
+
+    text-align:center;
+
+    margin-bottom:15px;
+}
+
+#moveList{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    list-style:none;
+}
+
+#moveList li{
+
+    background:#F4F6F8;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    margin-bottom:8px;
+
+    font-size:14px;
+} */
+
+/* ===================================================
+   WIN SCREEN
+=================================================== */
+
+#winScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    rgba(255,255,255,.95);
+
+    z-index:1200;
+}
+
+.win-card{
+
+    width:500px;
+
+    max-width:90%;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.15);
+}
+
+.trophy{
+
+    font-size:150px;
+
+    animation:
+    trophyBounce 1.6s infinite;
+}
+
+@keyframes trophyBounce{
+
+    0%{
+
+        transform:
+        translateY(0);
+    }
+
+    50%{
+
+        transform:
+        translateY(-20px);
+    }
+
+    100%{
+
+        transform:
+        translateY(0);
+    }
+}
+
+#winnerText{
+
+    font-size:42px;
+
+    margin-top:15px;
+
+    margin-bottom:25px;
+}
+
+#playAgain{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:12px;
+
+    border-radius:12px;
+
+    background:var(--blue);
+
+    color:white;
+
+    font-weight:600;
+}
+
+#backHome{
+
+    width:100%;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    background:var(--red);
+
+    color:white;
+
+    font-weight:600;
+}
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media(max-width:1100px){
+
+    .side-panel,
+    .history-panel{
+
+        width:220px;
+    }
+}
+
+@media(max-width:900px){
+
+    #gameScreen{
+
+        flex-direction:column;
+    }
+
+    .side-panel,
+    .history-panel{
+
+        width:100%;
+    }
+
+    #board{
+
+        width:min(90vw,70vh);
+
+        height:min(90vw,70vh);
+    }
+}
