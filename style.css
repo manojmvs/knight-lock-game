@@ -914,6 +914,181 @@ button:hover{
         transform:scale(1);
     }
 }
+button:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+    filter:grayscale(1);
+}
+
+/* Player Names */
+#playerPopup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.55);
+
+    z-index:9999;
+}
+
+.player-popup-card{
+
+    width:min(400px,90vw);
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.player-popup-card input{
+
+    width:100%;
+
+    padding:14px;
+
+    border:2px solid #D9DEE5;
+
+    border-radius:10px;
+
+    text-align:center;
+}
+
+#startMatchBtn{
+
+    background:#2D7FF9;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:10px;
+}
+
+#cancelPopupBtn{
+
+    background:#E74C3C;
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:10px;
+}
+
+#nameError{
+
+    color:#E74C3C;
+
+    text-align:center;
+
+    min-height:20px;
+}
+
+/* Loser animation */
+/* ==========================
+   LOSER VANISH
+========================== */
+
+.vanish{
+
+    animation:
+    vanishPlayer 1.5s forwards;
+}
+
+@keyframes vanishPlayer{
+
+    0%{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
+    50%{
+
+        opacity:.5;
+
+        transform:scale(1.4)
+        rotate(180deg);
+    }
+
+    100%{
+
+        opacity:0;
+
+        transform:scale(0)
+        rotate(360deg);
+    }
+}
+
+/* Tutorial Popup */
+#easyHintBanner{
+
+    display:none;
+
+    width:auto;
+
+    max-width:650px;
+
+    margin:10px auto 15px auto;
+
+    padding:10px 16px;
+
+    background:#E8F8EC;
+
+    border:2px dashed #27AE60;
+
+    color:#1E8449;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    line-height:1.4;
+
+    animation:hintPulse 1.5s infinite;
+
+    flex:none;
+}
+
+/* @keyframes hintPulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.03);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+} */
 
 /* ===================================================
    RESPONSIVE
@@ -941,16 +1116,18 @@ button:hover{
 
     .board-wrapper{
 
-        flex:1;
+    flex:1;
 
-        display:flex;
+    display:flex;
 
-        justify-content:center;
+    flex-direction:column;
 
-        align-items:center;
+    align-items:center;
 
-        padding:20px;
-    }
+    justify-content:flex-start;
+
+    padding:15px;
+}
 
     #board{
 
@@ -1069,17 +1246,12 @@ button:hover{
         padding:10px;
     }
 
-    #board{
+   #board{
 
-        width:min(92vw,68vh);
+    width:min(94vw,80vh);
 
-        height:min(92vw,68vh);
-
-        max-width:none;
-
-        max-height:none;
-    }
-
+    height:min(94vw,80vh);
+}
     .cell{
 
         font-size:clamp(
@@ -1251,4 +1423,108 @@ body{
     env(safe-area-inset-left);
 }
 
+/* ==========================================
+   TABLET (768px - 1024px)
+========================================== */
 
+@media screen and
+(min-width:768px) and
+(max-width:1024px){
+
+    .side-panel{
+
+        padding:12px;
+
+        display:grid;
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:10px;
+    }
+
+    .side-panel h2{
+
+        grid-column:1/-1;
+
+        text-align:center;
+
+        margin-bottom:5px;
+    }
+
+    #turnIndicator{
+
+        grid-column:1/-1;
+
+        padding:10px;
+    }
+
+    .players{
+
+        display:grid;
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:10px;
+    }
+
+    .gameInfo{
+
+        grid-column:1/-1;
+    }
+
+    .board-wrapper{
+
+        padding:10px;
+    }
+
+    #board{
+
+        width:min(88vw,78vh);
+
+        height:min(88vw,78vh);
+
+        margin:auto;
+    }
+}
+
+/* I PAD */
+@media screen and
+(min-width:768px) and
+(max-width:1024px){
+
+    #gameScreen{
+
+        display:flex;
+        flex-direction:column;
+    }
+
+    .side-panel{
+
+        width:100%;
+    }
+
+    #board{
+
+        width:90vw;
+        height:90vw;
+
+        max-width:720px;
+        max-height:720px;
+    }
+}
+
+@media screen and (max-width:1024px){
+
+    #easyHintBanner{
+
+        max-width:90vw;
+
+        font-size:13px;
+
+        padding:8px 12px;
+
+        margin-bottom:10px;
+    }
+}

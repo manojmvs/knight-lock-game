@@ -54,9 +54,68 @@ document.getElementById("difficultyLabel");
 const player2Label =
 document.getElementById("player2Label");
 
+const player1Label =
+document.getElementById("player1Label");
+
 const difficultyHomeBtn =
 document.getElementById(
 "difficultyHomeBtn"
+);
+
+
+// Player pop
+
+const playerPopup =
+document.getElementById(
+"playerPopup"
+);
+
+const player1NameInput =
+document.getElementById(
+"player1Name"
+);
+
+const player2NameInput =
+document.getElementById(
+"player2Name"
+);
+
+const startMatchBtn =
+document.getElementById(
+"startMatchBtn"
+);
+
+const cancelPopupBtn =
+document.getElementById(
+"cancelPopupBtn"
+);
+let selectedMode = "";
+
+let selectedDifficulty = "";
+
+const easyBtn =
+document.getElementById(
+"easyBtn"
+);
+
+const mediumBtn =
+document.getElementById(
+"mediumBtn"
+);
+
+const hardBtn =
+document.getElementById(
+"hardBtn"
+);
+
+const nameError =
+document.getElementById(
+"nameError"
+);
+
+const easyHintBanner =
+document.getElementById(
+"easyHintBanner"
 );
 
 /* =====================================================
@@ -90,6 +149,10 @@ const gameState = {
     mode : "twoPlayer",
 
     difficulty : "easy",
+
+    player1Name : "",
+
+    player2Name : "",
 
     botEnabled : false,
 
@@ -155,6 +218,10 @@ function startGameplayMusic(){
     gameplayMusic.play()
     .catch(()=>{});
 }
+
+// Popupbanner
+easyHintBanner.style.display =
+"block";
 
 /* =====================================================
    BOARD CREATION
@@ -340,7 +407,9 @@ function renderBoard(){
 
         cell.innerHTML =
         "";
+        
     });
+    showHints();
 
     gameState.blocked
     .forEach(block=>{
@@ -415,7 +484,7 @@ function renderBoard(){
         "#DDEBFF";
 
         turnText.textContent =
-        "Player 1";
+gameState.player1Name;
 
     }else{
 
@@ -428,15 +497,15 @@ function renderBoard(){
 
         turnText.textContent =
 
-        gameState.botEnabled
+gameState.botEnabled
 
-        ?
+?
 
-        "BOT"
+"BOT"
 
-        :
+:
 
-        "Player 2";
+gameState.player2Name;
     }
 }
 
@@ -451,6 +520,16 @@ function renderBoard(){
 
 function executeMove(row,col){
 
+    if(
+    gameState.mode === "single" &&
+    gameState.difficulty === "easy"
+){
+
+    easyHintBanner.style.display =
+    "none";
+}
+
+
     if(gameState.gameOver)
     return;
 
@@ -460,6 +539,14 @@ function executeMove(row,col){
     playSound(
     jumpSound
     );
+    document
+.querySelectorAll(".hint")
+.forEach(cell=>{
+
+    cell.classList.remove(
+    "hint"
+    );
+});
 
     gameState.blocked.push({
 
@@ -535,6 +622,35 @@ function executeMove(row,col){
     gameState.moveCount++;
 
     renderBoard();
+    if(
+    gameState.mode === "single" &&
+    gameState.difficulty === "easy"
+){
+
+    if(tutorialStep === 0){
+
+        tutorialStep = 1;
+
+        easyHintBanner.textContent =
+        "Good! The previous tile is now blocked.";
+
+    }else if(tutorialStep === 1){
+
+        tutorialStep = 2;
+
+        easyHintBanner.textContent =
+        "Trap the opponent by leaving no valid moves.";
+
+    }else if(tutorialStep === 2){
+
+        setTimeout(()=>{
+
+            easyHintBanner.style.display =
+            "none";
+
+        },2000);
+    }
+}
 }
 
 /* =====================================================
@@ -631,12 +747,13 @@ function checkWinner(){
         playSound(
         blockSound
         );
+        animateLoser();
 
         setTimeout(()=>{
 
             showWinner();
 
-        },500);
+        },1800);
 
         return true;
     }
@@ -852,43 +969,49 @@ function botTurn(){
 
 function showWinner(){
 
+      if(
+        gameState.mode === "single" &&
+        gameState.difficulty === "easy"
+    ){
+
+        unlockAllModes();
+    }
     const winner =
 
-    gameState.currentPlayer
-    === "blue"
+gameState.currentPlayer === "blue"
 
-    ?
+?
 
-    (
-    gameState.botEnabled
+(
+gameState.botEnabled
 
-    ?
+?
 
-    "BOT"
+"BOT"
 
-    :
+:
 
-    "Player 2"
-    )
+gameState.player2Name
+)
 
-    :
+:
 
-    "Player 1";
+gameState.player1Name;
 
     winnerText.textContent =
     `${winner} Wins!`;
 
     winnerText.style.color =
 
-    winner==="Player 1"
+winner === gameState.player1Name
 
-    ?
+?
 
-    "#2D7FF9"
+"#2D7FF9"
 
-    :
+:
 
-    "#E74C3C";
+"#E74C3C";
 
     if(
     gameState.musicEnabled
@@ -1009,6 +1132,25 @@ difficultyHomeBtn.addEventListener(
 
 function startGame(){
 
+    if(
+    gameState.mode === "single" &&
+    gameState.difficulty === "easy"
+){
+
+    tutorialStep = 0;
+
+    easyHintBanner.style.display =
+    "block";
+
+    easyHintBanner.textContent =
+    "Tutorial: Tap any green dotted square. Knights move in an L-shape.";
+
+}else{
+
+    easyHintBanner.style.display =
+    "none";
+}
+
     homeScreen.style.display =
     "none";
 
@@ -1032,6 +1174,7 @@ function startGame(){
 
     renderBoard();
 }
+
 
 
 
@@ -1181,56 +1324,49 @@ twoPlayerBtn.addEventListener(
     buttonSound
     );
 
-    gameState.mode =
+    selectedMode =
     "twoPlayer";
 
-    gameState.botEnabled =
-    false;
+    selectedDifficulty =
+    "";
 
-    modeLabel.textContent =
-    "2 Player";
+    player2NameInput.style.display =
+    "block";
 
-    difficultyLabel.textContent =
-    "-";
-
-    player2Label.textContent =
-    "Player 2";
-    
-
-    startGame();
+    playerPopup.style.display =
+    "flex";
 });
-
 /* =====================================================
    DIFFICULTY
 ===================================================== */
 
-difficultyButtons.forEach(button=>{
+// difficultyButtons.forEach(button=>{
 
-    button.addEventListener(
-    "click",
-    ()=>{
+//     button.addEventListener(
+//     "click",
+//     ()=>{
 
-        playSound(
-        buttonSound
-        );
+//         playSound(
+//         buttonSound
+//         );
 
-        gameState.difficulty =
-        button.dataset.level;
+//         gameState.difficulty =
+//         button.dataset.level;
 
-        difficultyLabel.textContent =
+//         difficultyLabel.textContent =
 
-        button.dataset.level
-        .charAt(0)
-        .toUpperCase()
+//         button.dataset.level
+//         .charAt(0)
+//         .toUpperCase()
 
-        +
+//         +
 
-        button.dataset.level
-        .slice(1);
+//         button.dataset.level
+//         .slice(1);
 
-        startGame();
-    });
-});
+//         startGame();
+//     });
+// });
 
 /* =====================================================
    RULES
@@ -1385,4 +1521,295 @@ window.addEventListener(
 ()=>{
 
     initializeGame();
+});
+function showHints(){
+
+    document
+.querySelectorAll(".hint")
+.forEach(cell=>{
+
+    cell.classList.remove(
+    "hint"
+    );
+});
+
+    if(
+    gameState.mode !== "single"
+    ) return;
+
+    if(
+    gameState.difficulty !== "easy"
+    ) return;
+
+    if(
+    gameState.currentPlayer !== "blue"
+    ) return;
+
+    const moves =
+    getValidMoves(
+    gameState.blue
+    );
+
+    moves.forEach(move=>{
+
+        const cell =
+        getCell(
+        move.row,
+        move.col
+        );
+
+        if(cell){
+
+            cell.classList.add(
+            "hint"
+            );
+        }
+    });
+}
+
+function unlockAllModes(){
+
+    localStorage.setItem(
+        "easyPlayed",
+        "true"
+    );
+
+    mediumBtn.disabled = false;
+
+    hardBtn.disabled = false;
+
+    twoPlayerBtn.disabled = false;
+
+    mediumBtn.innerHTML =
+    "Medium";
+
+    hardBtn.innerHTML =
+    "Hard";
+
+    twoPlayerBtn.innerHTML =
+    "2 Player";
+}
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+    if(
+        localStorage.getItem(
+        "easyPlayed"
+        ) === "true"
+    ){
+
+        unlockAllModes();
+    }
+});
+
+// Player pop on modes
+easyBtn.addEventListener("click",()=>{
+
+    
+
+    player1NameInput.value = "";
+    player2NameInput.value = "";
+
+    nameError.textContent = "";
+
+    selectedMode = "single";
+    selectedDifficulty = "easy";
+
+    player2NameInput.style.display = "none";
+
+    playerPopup.style.display = "flex";
+});
+
+mediumBtn.addEventListener("click", () => {
+
+    player1NameInput.value = "";
+player2NameInput.value = "";
+
+nameError.textContent = "";
+    
+    selectedMode = "single";
+
+    selectedDifficulty = "medium";
+
+    player2NameInput.style.display = "none";
+
+    playerPopup.style.display = "flex";
+
+});
+
+hardBtn.addEventListener("click", () => {
+
+    player1NameInput.value = "";
+player2NameInput.value = "";
+
+nameError.textContent = "";
+    
+    
+    selectedMode = "single";
+
+    selectedDifficulty = "hard";
+
+    player2NameInput.style.display = "none";
+
+    playerPopup.style.display = "flex";
+
+});
+// Validate
+startMatchBtn.addEventListener(
+"click",
+()=>{
+
+    const p1 =
+    player1NameInput.value.trim();
+
+    const p2 =
+    player2NameInput.value.trim();
+
+    nameError.textContent = "";
+
+    /* Validate Player 1 */
+
+    if(
+        p1.length < 3 ||
+        p1.length > 6
+    ){
+
+        nameError.textContent =
+        "Player 1 name must be 3-6 characters";
+
+        return;
+    }
+
+    /* Validate Player 2 */
+
+    if(
+        selectedMode === "twoPlayer"
+    ){
+
+        if(
+            p2.length < 3 ||
+            p2.length > 6
+        ){
+
+            nameError.textContent =
+            "Player 2 name must be 3-6 characters";
+
+            return;
+        }
+    }
+
+    /* Store Names */
+
+    gameState.player1Name = p1;
+
+    gameState.player2Name =
+
+    selectedMode === "twoPlayer"
+
+    ? p2
+
+    : "BOT";
+
+    player1Label.textContent = gameState.player1Name;
+
+player2Label.textContent = gameState.player2Name;
+
+    /* Store Mode */
+
+    gameState.mode = selectedMode;
+
+    gameState.difficulty = selectedDifficulty;
+
+    gameState.botEnabled = selectedMode !== "twoPlayer";
+
+    /* Update UI Labels */
+
+    modeLabel.textContent = selectedMode === "twoPlayer"
+
+    ?
+
+    "2 Player"
+
+    :
+
+    "1 Player";
+
+    difficultyLabel.textContent =
+
+    selectedDifficulty
+
+    ?
+
+    selectedDifficulty
+    .charAt(0)
+    .toUpperCase()
+
+    +
+
+    selectedDifficulty
+    .slice(1)
+
+    :
+
+    "-";
+
+    player2Label.textContent =
+    gameState.player2Name;
+
+    /* Reset Board */
+
+    resetGame();
+
+    /* Close Popup */
+
+    playerPopup.style.display =
+    "none";
+
+    /* Start Game */
+
+    startGame();
+});
+// loser animation
+function animateLoser(){
+
+    let loserPos;
+
+    if(
+        gameState.currentPlayer === "blue"
+    ){
+
+        loserPos =
+        gameState.blue;
+
+    }else{
+
+        loserPos =
+        gameState.red;
+    }
+
+    const cell =
+    getCell(
+        loserPos.row,
+        loserPos.col
+    );
+
+    if(cell){
+
+        cell.classList.add(
+            "vanish"
+        );
+    }
+}
+
+// cancelpopup
+cancelPopupBtn.addEventListener(
+"click",
+()=>{
+
+    playerPopup.style.display =
+    "none";
+
+    nameError.textContent = "";
 });

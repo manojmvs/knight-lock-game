@@ -42,8 +42,10 @@ HOME SCREEN
                 1 Player
             </button>
 
-            <button id="twoPlayerBtn">
-                2 Players
+            <button id="twoPlayerBtn" disabled>
+
+              🔒 2 Player
+
             </button>
 
         </div>
@@ -72,12 +74,13 @@ DIFFICULTY SCREEN
 
     <div class="difficulty-card">
 
-        <h2>
-            Select Difficulty
-        </h2>
+        <h2>Select Difficulty</h2>
+
+     
 
         <button
         class="difficultyBtn"
+        id="easyBtn"
         data-level="easy">
 
             Easy
@@ -86,23 +89,35 @@ DIFFICULTY SCREEN
 
         <button
         class="difficultyBtn"
-        data-level="medium">
+        id="mediumBtn"
+        data-level="medium"
+        disabled>
 
-            Medium
+            🔒 Medium
 
         </button>
 
         <button
         class="difficultyBtn"
-        data-level="hard">
+        id="hardBtn"
+        data-level="hard"
+        disabled>
 
-            Hard
+            🔒 Hard
 
         </button>
-        
-        <button id="difficultyHomeBtn">
-    Home
-</button>
+
+        <button
+        id="difficultyHomeBtn">
+
+            Home
+
+        </button>
+
+    </div>
+
+
+
 
     </div>
 
@@ -193,7 +208,11 @@ GAME SCREEN
 
                 </span>
 
-                Player 1
+               <span id="player1Label">
+
+        Player 1
+
+    </span>
 
             </div>
 
@@ -257,9 +276,18 @@ GAME SCREEN
 
     </aside>
 
+  
+
     <!-- BOARD -->
 
     <main class="board-wrapper">
+
+          <div id="easyHintBanner">
+
+    👆 Tap a green dotted box to make your move
+
+</div>
+
 
         <div id="board">
 
@@ -392,7 +420,53 @@ AUDIO
 </div>
 
 
+
+
+
+<div id="easyHintBanner"></div>
+<!-- Player Names -->
+ 
+<section id="playerPopup">
+
+    <div class="player-popup-card">
+
+        <h2>
+            Player Details
+        </h2>
+
+        <input
+        type="text"
+        id="player1Name"
+        maxlength="6"
+        placeholder="Player 1 Name">
+
+        <input
+        type="text"
+        id="player2Name"
+        maxlength="6"
+        placeholder="Player 2 Name">
+
+        <p id="nameError"></p>
+
+        <button id="startMatchBtn">
+
+            Start Game
+
+        </button>
+
+        <button id="cancelPopupBtn">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</section>
+
+
 <script src="script.js"></script>
+
 
 
 </body>
