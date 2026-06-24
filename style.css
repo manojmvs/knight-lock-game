@@ -93,7 +93,10 @@ button:hover{
 
 .home-card{
 
-    width:520px;
+     width:min(
+        520px,
+        90vw
+    );
 
     max-width:90%;
 
@@ -412,10 +415,13 @@ button:hover{
 #gameScreen{
 
     width:100%;
-
-    height:100vh;
+    min-height:100vh;
 
     display:flex;
+
+    flex-wrap:wrap;
+
+    overflow:hidden;
 }
 
 /* ===================================================
@@ -424,7 +430,9 @@ button:hover{
 
 .side-panel{
 
-    width:280px;
+     width:260px;
+
+    flex-shrink:0;
 
     background:white;
 
@@ -568,9 +576,15 @@ button:hover{
 
 #board{
 
-    width:min(78vh,78vw);
+     width:min(80vh,70vw);
 
-    height:min(78vh,78vw);
+    aspect-ratio:1;
+
+    height:auto;
+
+    max-width:700px;
+
+    max-height:700px;
 
     background:var(--board);
 
@@ -603,7 +617,12 @@ button:hover{
 
     align-items:center;
 
-    font-size:50px;
+     font-size:clamp(
+        22px,
+        4vw,
+        50px
+    );
+
 
     transition:.2s;
 }
@@ -771,7 +790,10 @@ button:hover{
 
 .win-card{
 
-    width:500px;
+     width:min(
+        500px,
+        90vw
+    );
 
     max-width:90%;
 
@@ -890,3 +912,138 @@ button:hover{
         height:min(90vw,70vh);
     }
 }
+@media(max-width:1024px){
+
+    .side-panel{
+
+        width:220px;
+    }
+
+    #board{
+
+        width:min(
+            70vw,
+            70vh
+        );
+    }
+}
+/* Mobile landscape */
+@media(max-width:900px){
+
+    #gameScreen{
+
+        flex-direction:column;
+    }
+
+    .side-panel{
+
+        width:100%;
+
+        padding:15px;
+
+        display:grid;
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:10px;
+    }
+
+    .board-wrapper{
+
+        flex:1;
+
+        padding:10px;
+    }
+
+    #board{
+
+        width:min(
+            90vw,
+            70vh
+        );
+    }
+}
+/* Mobile Portrait */
+@media(max-width:600px){
+
+    .home-card{
+
+        padding:25px;
+    }
+
+    .home-card h1{
+
+        font-size:42px;
+    }
+
+    .mode-buttons{
+
+        flex-direction:column;
+    }
+
+    .secondary-buttons{
+
+        flex-direction:column;
+    }
+
+    #board{
+
+        width:95vw;
+    }
+
+    .cell{
+
+        border-radius:8px;
+    }
+
+    .trophy{
+
+        font-size:90px;
+    }
+
+    #winnerText{
+
+        font-size:28px;
+    }
+}
+
+/* only landscape */
+#rotateDevice{
+
+    display:none;
+}
+
+@media(
+orientation:portrait
+)
+and
+(max-width:900px){
+
+    #rotateDevice{
+
+        display:flex;
+
+        position:fixed;
+
+        inset:0;
+
+        background:white;
+
+        z-index:99999;
+
+        justify-content:center;
+
+        align-items:center;
+
+        font-size:24px;
+
+        font-weight:700;
+    }
+
+    #gameScreen{
+
+        display:none !important;
+    }
+}
+
