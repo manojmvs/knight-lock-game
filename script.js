@@ -115,6 +115,33 @@ document.getElementById(
 
 
 
+const pauseBtn =
+document.getElementById(
+"pauseBtn"
+);
+
+const pauseScreen =
+document.getElementById(
+"pauseScreen"
+);
+
+const resumeBtn =
+document.getElementById(
+"resumeBtn"
+);
+
+const pauseRestartBtn =
+document.getElementById(
+"pauseRestartBtn"
+);
+
+const pauseHomeBtn =
+document.getElementById(
+"pauseHomeBtn"
+);
+
+
+
 /* =====================================================
    AUDIO
 ===================================================== */
@@ -154,6 +181,7 @@ const gameState = {
     botEnabled : false,
 
     currentPlayer : "blue",
+    paused : false,
 
     gameOver : false,
 
@@ -176,6 +204,59 @@ const gameState = {
     blocked : []
 };
 
+
+if(
+    pauseBtn &&
+    pauseScreen &&
+    resumeBtn &&
+    pauseRestartBtn &&
+    pauseHomeBtn
+){
+
+    pauseBtn.addEventListener(
+    "click",
+    ()=>{
+
+        gameState.paused = true;
+
+        pauseScreen.style.display =
+        "flex";
+    });
+
+    resumeBtn.addEventListener(
+    "click",
+    ()=>{
+
+        gameState.paused = false;
+
+        pauseScreen.style.display =
+        "none";
+    });
+
+    pauseRestartBtn.addEventListener(
+    "click",
+    ()=>{
+
+        gameState.paused = false;
+
+        pauseScreen.style.display =
+        "none";
+
+        resetGame();
+    });
+
+    pauseHomeBtn.addEventListener(
+    "click",
+    ()=>{
+
+        gameState.paused = false;
+
+        pauseScreen.style.display =
+        "none";
+
+        returnToHome();
+    });
+}
 /* =====================================================
    AUDIO MANAGER
 ===================================================== */
@@ -405,22 +486,7 @@ function renderBoard(){
         
     });
     showHints();
-    if(
-    gameState.mode === "single" &&
-    gameState.difficulty === "easy" &&
-    gameState.moveCount === 0
-){
-
-    board.classList.add(
-    "tutorial-active"
-    );
-
-}else{
-
-    board.classList.remove(
-    "tutorial-active"
-    );
-}
+   
 
     gameState.blocked
     .forEach(block=>{
@@ -529,12 +595,14 @@ gameState.player2Name;
    PLAYER MOVE
 ===================================================== */
 
+
 function executeMove(row,col){
 
-    if(
-    gameState.mode === "single" &&
-    gameState.difficulty === "easy"
-)
+       if(
+        gameState.paused
+    ){
+        return;
+    }
 
 
     if(gameState.gameOver)
@@ -546,14 +614,17 @@ function executeMove(row,col){
     playSound(
     jumpSound
     );
-    document
-.querySelectorAll(".hint")
-.forEach(cell=>{
 
-    cell.classList.remove(
-    "hint"
-    );
-});
+    document
+    .querySelectorAll(".hint")
+    .forEach(cell=>{
+
+        cell.classList.remove(
+        "hint"
+        );
+
+        cell.textContent = "";
+    });
 
     gameState.blocked.push({
 
@@ -567,16 +638,6 @@ function executeMove(row,col){
         gameState.currentPlayer
     });
 
-    setTimeout(()=>{
-
-            playSound(
-        jumpSound
-        );
-
-
-
-    },120);
-
     if(
     gameState.currentPlayer
     === "blue"
@@ -587,15 +648,6 @@ function executeMove(row,col){
             row,
             col
         };
-
-        addMoveHistory(
-
-        `${gameState.moveCount}.
-        Player 1 →
-        (${row+1},
-        ${col+1})`
-
-        );
 
         gameState.currentPlayer =
         "red";
@@ -608,57 +660,18 @@ function executeMove(row,col){
             col
         };
 
-        addMoveHistory(
-
-        `${gameState.moveCount}.
-        ${
-        gameState.botEnabled
-        ? "BOT"
-        : "Player 2"
-        }
-        →
-        (${row+1},
-        ${col+1})`
-
-        );
-
         gameState.currentPlayer =
         "blue";
     }
 
-    gameState.moveCount++;
+  gameState.moveCount++;
 
-    renderBoard();
-    if(
-    gameState.mode === "single" &&
-    gameState.difficulty === "easy"
-){
+renderBoard();
 
-    if(tutorialStep === 0){
-
-        tutorialStep = 1;
-
-        easyHintBanner.textContent =
-        "Good! The previous tile is now blocked.";
-
-    }else if(tutorialStep === 1){
-
-        tutorialStep = 2;
-
-        easyHintBanner.textContent =
-        "Trap the opponent by leaving no valid moves.";
-
-    }else if(tutorialStep === 2){
-
-        setTimeout(()=>{
-
-            easyHintBanner.style.display =
-            "none";
-
-        },2000);
-    }
+checkWinner();
 }
-}
+
+
 
 /* =====================================================
    CELL CLICK
@@ -1138,26 +1151,6 @@ difficultyHomeBtn.addEventListener(
 
 
 function startGame(){
-
-    if(
-    gameState.mode === "single" &&
-    gameState.difficulty === "easy"
-){
-
-    tutorialStep = 0;
-
-    easyHintBanner.style.display =
-    "block";
-
-    easyHintBanner.textContent =
-    "Tutorial: Tap any green dotted square. Knights move in an L-shape.";
-
-}else{
-
-    easyHintBanner.style.display =
-    "none";
-}
-
     homeScreen.style.display =
     "none";
 
@@ -1570,6 +1563,14 @@ function showHints(){
             cell.classList.add(
             "hint"
             );
+            if(
+    gameState.mode === "single" &&
+    gameState.difficulty === "easy" &&
+    gameState.moveCount === 1
+){
+
+    cell.textContent = "TAP";
+}
         }
     });
 }

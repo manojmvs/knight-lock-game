@@ -893,8 +893,23 @@ button:hover{
 
     cursor:pointer;
 
-    animation:
-    hintPulse 1s infinite;
+    animation:hintPulse 1s infinite;
+
+        border:3px dashed #27AE60;
+
+    color:#27AE60;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
 }
 
 @keyframes hintPulse{
@@ -1040,47 +1055,135 @@ button:disabled{
         rotate(360deg);
     }
 }
-#board{
 
-    position:relative;
-}
+/* Pause Button */
+/* =========================
+   PAUSE BUTTON
+========================= */
 
-#board.tutorial-active::before{
+#pauseBtn{
 
-    content:
-    "👆 Tap a green dotted square to move";
+    width:60px;
 
-    position:absolute;
+    height:60px;
 
-    left:50%;
-    top:50%;
-
-    transform:
-    translate(-50%,-50%);
-
-    background:
-    rgba(255,255,255,0.95);
-
-    color:#27AE60;
-
-    border:2px dashed #27AE60;
-
-    padding:12px 18px;
+    border:none;
 
     border-radius:12px;
 
-    font-size:14px;
+    background:#FFD54F;
 
-    font-weight:600;
+    font-size:26px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+#pauseBtn:hover{
+
+    transform:scale(1.05);
+
+    background:#FFC107;
+}
+
+/* =========================
+   PAUSE SCREEN
+========================= */
+
+#pauseScreen{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.65);
+
+    z-index:99999;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.pause-card{
+
+    width:min(90vw,350px);
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
 
     text-align:center;
 
-    z-index:50;
+    display:flex;
 
-    pointer-events:none;
+    flex-direction:column;
 
-    max-width:70%;
+    gap:15px;
+
+    box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.2);
 }
+
+.pause-card h2{
+
+    margin:0 0 10px;
+
+    color:#1F2937;
+}
+
+.pause-card button{
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+#resumeBtn{
+
+    background:#2D7FF9;
+
+    color:white;
+}
+
+#pauseRestartBtn{
+
+    background:#FFA726;
+
+    color:white;
+}
+
+#pauseHomeBtn{
+
+    background:#EF5350;
+
+    color:white;
+}
+
+.pause-card button:hover{
+
+    transform:translateY(-2px);
+}
+
 
 /* ===================================================
    RESPONSIVE
