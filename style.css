@@ -881,6 +881,39 @@ button:hover{
     font-weight:600;
 }
 
+/* ==========================================
+   EASY MODE HINTS
+========================================== */
+
+.hint{
+
+    background:#DFF5E1 !important;
+
+    border:3px dashed #27AE60;
+
+    cursor:pointer;
+
+    animation:
+    hintPulse 1s infinite;
+}
+
+@keyframes hintPulse{
+
+    0%{
+
+        transform:scale(1);
+    }
+
+    50%{
+
+        transform:scale(1.08);
+    }
+
+    100%{
+
+        transform:scale(1);
+    }
+}
 
 /* ===================================================
    RESPONSIVE
