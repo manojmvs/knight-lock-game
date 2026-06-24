@@ -1019,9 +1019,86 @@ button:hover{
 }
 
 /* only landscape */
+/* ==========================================
+   ROTATE DEVICE SCREEN
+========================================== */
+
 #rotateDevice{
 
     display:none;
+}
+
+.rotate-card{
+
+    text-align:center;
+
+    padding:30px;
+}
+
+.rotate-icon{
+
+    font-size:80px;
+
+    margin-bottom:20px;
+
+    animation:
+    rotatePhone 2s infinite;
+}
+
+@keyframes rotatePhone{
+
+    0%{
+
+        transform:
+        rotate(0deg);
+    }
+
+    50%{
+
+        transform:
+        rotate(90deg);
+    }
+
+    100%{
+
+        transform:
+        rotate(0deg);
+    }
+}
+
+/* ==========================================
+   MOBILE LANDSCAPE BLOCK
+========================================== */
+
+@media screen
+and (max-width:1024px)
+and (orientation:landscape){
+
+    #rotateDevice{
+
+        display:flex;
+
+        position:fixed;
+
+        inset:0;
+
+        z-index:99999;
+
+        background:#ffffff;
+
+        justify-content:center;
+
+        align-items:center;
+    }
+
+    #homeScreen,
+    #gameScreen,
+    #difficultyScreen,
+    #rulesScreen,
+    #winScreen{
+
+        display:none !important;
+    }
 }
 
 @media(
@@ -1091,4 +1168,41 @@ body{
     env(safe-area-inset-bottom)
     env(safe-area-inset-left);
 }
+@media screen
+and (max-width:1024px)
+and (orientation:portrait){
 
+    #gameScreen{
+
+        display:flex;
+
+        flex-direction:column;
+    }
+
+    .side-panel{
+
+        width:100%;
+
+        padding:15px;
+    }
+
+    .board-wrapper{
+
+        flex:1;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+    }
+
+    #board{
+
+        width:92vw;
+
+        height:92vw;
+
+        max-width:none;
+    }
+}
