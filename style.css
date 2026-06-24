@@ -572,6 +572,8 @@ button:hover{
     justify-content:center;
 
     align-items:center;
+
+    padding:8px;
 }
 
 #board{
@@ -928,40 +930,41 @@ button:hover{
     }
 }
 /* Mobile landscape */
-@media(max-width:900px){
+@media (max-width: 932px) {
 
     #gameScreen{
 
-        flex-direction:column;
+        display:flex;
+
+        flex-direction:row;
+
+        height:100vh;
+
+        overflow:hidden;
     }
 
     .side-panel{
 
-        width:100%;
+        width:28%;
 
-        padding:15px;
+        min-width:140px;
 
-        display:grid;
-
-        grid-template-columns:
-        repeat(2,1fr);
-
-        gap:10px;
-    }
-
-    .board-wrapper{
-
-        flex:1;
+        max-width:220px;
 
         padding:10px;
     }
 
-    #board{
+    .board-wrapper{
 
-        width:min(
-            90vw,
-            70vh
-        );
+        width:72%;
+
+        flex:none;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
     }
 }
 /* Mobile Portrait */
@@ -989,9 +992,16 @@ button:hover{
 
     #board{
 
-        width:95vw;
-    }
+    width:100%;
 
+    max-width:95vw;
+
+    max-height:95vh;
+
+    aspect-ratio:1;
+
+    height:auto;
+}
     .cell{
 
         border-radius:8px;
@@ -1045,5 +1055,40 @@ and
 
         display:none !important;
     }
+}
+@media (max-width:932px){
+
+    .side-panel h2{
+
+        font-size:18px;
+    }
+
+    .player{
+
+        padding:8px;
+    }
+
+    .gameInfo{
+
+        padding:8px;
+
+        font-size:12px;
+    }
+
+    #restartBtn,
+    #homeBtn{
+
+        padding:10px;
+
+        font-size:14px;
+    }
+}
+body{
+
+    padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
 }
 
