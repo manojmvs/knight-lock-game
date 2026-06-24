@@ -1090,89 +1090,164 @@ button:disabled{
     }
 } */
 
+
 /* ===================================================
    RESPONSIVE
 =================================================== */
 
-/* ---------- DESKTOP & LAPTOP ---------- */
+/* ==========================================
+   DESKTOP / LAPTOP (>1024px)
+========================================== */
 
 @media screen and (min-width:1025px){
 
     #gameScreen{
 
         display:flex;
-
         flex-direction:row;
-
         min-height:100vh;
     }
 
     .side-panel{
 
         width:260px;
-
         flex-shrink:0;
     }
 
     .board-wrapper{
 
-    flex:1;
+        flex:1;
 
-    display:flex;
+        display:flex;
+        flex-direction:column;
 
-    flex-direction:column;
+        align-items:center;
+        justify-content:center;
 
-    align-items:center;
-
-    justify-content:flex-start;
-
-    padding:15px;
-}
+        padding:20px;
+    }
 
     #board{
 
         width:min(75vw,80vh);
-
         height:min(75vw,80vh);
 
         max-width:750px;
-
         max-height:750px;
     }
 }
 
-/* ---------- MOBILE & TABLET ---------- */
+/* ==========================================
+   TABLET (768px - 1024px)
+========================================== */
 
-@media screen and (max-width:1024px){
+@media screen and (min-width:768px) and (max-width:1024px){
 
     #gameScreen{
 
         display:flex;
-
         flex-direction:column;
-
         min-height:100vh;
-
-        overflow:hidden;
     }
 
     .side-panel{
 
         width:100%;
 
-        padding:10px;
-
         display:grid;
-
-        grid-template-columns:
-        repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
 
         gap:10px;
+        padding:12px;
 
-        border-right:none;
+        border-bottom:2px solid #e4e4e4;
+    }
 
-        border-bottom:
-        2px solid #e4e4e4;
+    .side-panel h2{
+
+        grid-column:1/-1;
+        text-align:center;
+    }
+
+    #turnIndicator{
+
+        grid-column:1/-1;
+    }
+
+    .gameInfo{
+
+        grid-column:1/-1;
+    }
+
+    .board-wrapper{
+
+        flex:1;
+
+        display:flex;
+        flex-direction:column;
+
+        align-items:center;
+        justify-content:flex-start;
+
+        padding:10px;
+    }
+
+    #easyHintBanner{
+
+        max-width:90vw;
+
+        font-size:14px;
+
+        padding:10px 14px;
+
+        margin-bottom:12px;
+    }
+
+    #board{
+
+        width:88vw;
+        height:88vw;
+
+        max-width:700px;
+        max-height:700px;
+
+        margin:auto;
+    }
+
+    .cell{
+
+        font-size:clamp(20px,4vw,36px);
+    }
+}
+
+/* ==========================================
+   MOBILE (<768px)
+========================================== */
+
+@media screen and (max-width:767px){
+
+    #gameScreen{
+
+        display:flex;
+        flex-direction:column;
+
+        min-height:100vh;
+
+        overflow-x:hidden;
+    }
+
+    .side-panel{
+
+        width:100%;
+
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+
+        gap:8px;
+
+        padding:10px;
+
+        border-bottom:2px solid #e4e4e4;
     }
 
     .side-panel h2{
@@ -1188,7 +1263,7 @@ button:disabled{
 
         grid-column:1/-1;
 
-        padding:12px;
+        padding:10px;
     }
 
     #turnIndicator span{
@@ -1196,190 +1271,77 @@ button:disabled{
         font-size:18px;
     }
 
-    .players{
-
-        display:grid;
-
-        grid-template-columns:
-        repeat(2,1fr);
-
-        gap:10px;
-    }
-
-    .player{
-
-        padding:10px;
-    }
-
-    .piece{
-
-        font-size:22px;
-    }
-
     .gameInfo{
 
         grid-column:1/-1;
-
-        padding:10px;
-    }
-
-    #restartBtn,
-    #homeBtn{
-
-        width:100%;
-
-        padding:12px;
-
-        font-size:15px;
     }
 
     .board-wrapper{
 
-        flex:1;
+        width:100%;
 
         display:flex;
-
-        justify-content:center;
+        flex-direction:column;
 
         align-items:center;
+        justify-content:flex-start;
 
         padding:10px;
     }
 
-   #board{
+    #easyHintBanner{
 
-    width:min(94vw,80vh);
+        width:90%;
 
-    height:min(94vw,80vh);
-}
+        max-width:320px;
+
+        font-size:13px;
+
+        padding:10px 12px;
+
+        margin:0 auto 12px auto;
+    }
+
+    #board{
+
+        width:92vw;
+        height:92vw;
+
+        max-width:360px;
+        max-height:360px;
+
+        margin:auto;
+    }
+
     .cell{
 
-        font-size:clamp(
-            20px,
-            5vw,
-            40px
-        );
+        font-size:clamp(18px,5vw,28px);
     }
 
     .block-blue::after,
     .block-red::after{
 
-        font-size:30px;
+        font-size:22px;
     }
-}
 
-/* ---------- SMALL PHONES ---------- */
-
-@media screen and (max-width:600px){
-
-    .home-card{
+    .home-card,
+    .difficulty-card,
+    .rules-card,
+    .win-card{
 
         width:95vw;
-
-        padding:20px;
     }
 
-    .home-card h1{
-
-        font-size:42px;
-    }
-
-    .home-card p{
-
-        font-size:14px;
-    }
-
-    .mode-buttons{
-
-        flex-direction:column;
-    }
-
+    .mode-buttons,
     .secondary-buttons{
 
         flex-direction:column;
     }
-
-    .difficulty-card{
-
-        width:92vw;
-
-        padding:25px;
-    }
-
-    .rules-card{
-
-        width:95vw;
-
-        padding:25px;
-    }
-
-    .win-card{
-
-        width:95vw;
-
-        padding:25px;
-    }
-
-    .trophy{
-
-        font-size:90px;
-    }
-
-    #winnerText{
-
-        font-size:28px;
-    }
-
-    .player-name-section input{
-
-        padding:14px;
-
-        font-size:15px;
-    }
 }
 
-/* ---------- ROTATE DEVICE ---------- */
-
-#rotateDevice{
-
-    display:none;
-}
-
-.rotate-card{
-
-    text-align:center;
-
-    padding:30px;
-}
-
-.rotate-icon{
-
-    font-size:80px;
-
-    margin-bottom:20px;
-
-    animation:rotatePhone 2s infinite;
-}
-
-@keyframes rotatePhone{
-
-    0%{
-
-        transform:rotate(0deg);
-    }
-
-    50%{
-
-        transform:rotate(90deg);
-    }
-
-    100%{
-
-        transform:rotate(0deg);
-    }
-}
-
-/* ---------- FORCE PORTRAIT FOR <=1024 ---------- */
+/* ==========================================
+   FORCE PORTRAIT
+========================================== */
 
 @media screen
 and (max-width:1024px)
@@ -1398,7 +1360,6 @@ and (orientation:landscape){
         z-index:99999;
 
         justify-content:center;
-
         align-items:center;
     }
 
@@ -1412,7 +1373,9 @@ and (orientation:landscape){
     }
 }
 
-/* ---------- SAFE AREA ---------- */
+/* ==========================================
+   SAFE AREA
+========================================== */
 
 body{
 
@@ -1423,108 +1386,4 @@ body{
     env(safe-area-inset-left);
 }
 
-/* ==========================================
-   TABLET (768px - 1024px)
-========================================== */
 
-@media screen and
-(min-width:768px) and
-(max-width:1024px){
-
-    .side-panel{
-
-        padding:12px;
-
-        display:grid;
-
-        grid-template-columns:
-        repeat(2,1fr);
-
-        gap:10px;
-    }
-
-    .side-panel h2{
-
-        grid-column:1/-1;
-
-        text-align:center;
-
-        margin-bottom:5px;
-    }
-
-    #turnIndicator{
-
-        grid-column:1/-1;
-
-        padding:10px;
-    }
-
-    .players{
-
-        display:grid;
-
-        grid-template-columns:
-        repeat(2,1fr);
-
-        gap:10px;
-    }
-
-    .gameInfo{
-
-        grid-column:1/-1;
-    }
-
-    .board-wrapper{
-
-        padding:10px;
-    }
-
-    #board{
-
-        width:min(88vw,78vh);
-
-        height:min(88vw,78vh);
-
-        margin:auto;
-    }
-}
-
-/* I PAD */
-@media screen and
-(min-width:768px) and
-(max-width:1024px){
-
-    #gameScreen{
-
-        display:flex;
-        flex-direction:column;
-    }
-
-    .side-panel{
-
-        width:100%;
-    }
-
-    #board{
-
-        width:90vw;
-        height:90vw;
-
-        max-width:720px;
-        max-height:720px;
-    }
-}
-
-@media screen and (max-width:1024px){
-
-    #easyHintBanner{
-
-        max-width:90vw;
-
-        font-size:13px;
-
-        padding:8px 12px;
-
-        margin-bottom:10px;
-    }
-}
