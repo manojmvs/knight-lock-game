@@ -881,56 +881,14 @@ button:hover{
     font-weight:600;
 }
 
+
 /* ===================================================
    RESPONSIVE
 =================================================== */
 
-@media(max-width:1100px){
+/* ---------- DESKTOP & LAPTOP ---------- */
 
-    .side-panel,
-    .history-panel{
-
-        width:220px;
-    }
-}
-
-@media(max-width:900px){
-
-    #gameScreen{
-
-        flex-direction:column;
-    }
-
-    .side-panel,
-    .history-panel{
-
-        width:100%;
-    }
-
-    #board{
-
-        width:min(90vw,70vh);
-
-        height:min(90vw,70vh);
-    }
-}
-@media(max-width:1024px){
-
-    .side-panel{
-
-        width:220px;
-    }
-
-    #board{
-
-        width:min(
-            70vw,
-            70vh
-        );
-    }
-}
-/* Mobile landscape */
-@media (max-width: 932px) {
+@media screen and (min-width:1025px){
 
     #gameScreen{
 
@@ -938,46 +896,192 @@ button:hover{
 
         flex-direction:row;
 
-        height:100vh;
-
-        overflow:hidden;
+        min-height:100vh;
     }
 
     .side-panel{
 
-        width:28%;
+        width:260px;
 
-        min-width:140px;
-
-        max-width:220px;
-
-        padding:10px;
+        flex-shrink:0;
     }
 
     .board-wrapper{
 
-        width:72%;
-
-        flex:none;
+        flex:1;
 
         display:flex;
 
         justify-content:center;
 
         align-items:center;
+
+        padding:20px;
+    }
+
+    #board{
+
+        width:min(75vw,80vh);
+
+        height:min(75vw,80vh);
+
+        max-width:750px;
+
+        max-height:750px;
     }
 }
-/* Mobile Portrait */
-@media(max-width:600px){
+
+/* ---------- MOBILE & TABLET ---------- */
+
+@media screen and (max-width:1024px){
+
+    #gameScreen{
+
+        display:flex;
+
+        flex-direction:column;
+
+        min-height:100vh;
+
+        overflow:hidden;
+    }
+
+    .side-panel{
+
+        width:100%;
+
+        padding:10px;
+
+        display:grid;
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:10px;
+
+        border-right:none;
+
+        border-bottom:
+        2px solid #e4e4e4;
+    }
+
+    .side-panel h2{
+
+        grid-column:1/-1;
+
+        text-align:center;
+
+        font-size:24px;
+    }
+
+    #turnIndicator{
+
+        grid-column:1/-1;
+
+        padding:12px;
+    }
+
+    #turnIndicator span{
+
+        font-size:18px;
+    }
+
+    .players{
+
+        display:grid;
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:10px;
+    }
+
+    .player{
+
+        padding:10px;
+    }
+
+    .piece{
+
+        font-size:22px;
+    }
+
+    .gameInfo{
+
+        grid-column:1/-1;
+
+        padding:10px;
+    }
+
+    #restartBtn,
+    #homeBtn{
+
+        width:100%;
+
+        padding:12px;
+
+        font-size:15px;
+    }
+
+    .board-wrapper{
+
+        flex:1;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        padding:10px;
+    }
+
+    #board{
+
+        width:min(92vw,68vh);
+
+        height:min(92vw,68vh);
+
+        max-width:none;
+
+        max-height:none;
+    }
+
+    .cell{
+
+        font-size:clamp(
+            20px,
+            5vw,
+            40px
+        );
+    }
+
+    .block-blue::after,
+    .block-red::after{
+
+        font-size:30px;
+    }
+}
+
+/* ---------- SMALL PHONES ---------- */
+
+@media screen and (max-width:600px){
 
     .home-card{
 
-        padding:25px;
+        width:95vw;
+
+        padding:20px;
     }
 
     .home-card h1{
 
         font-size:42px;
+    }
+
+    .home-card p{
+
+        font-size:14px;
     }
 
     .mode-buttons{
@@ -990,21 +1094,25 @@ button:hover{
         flex-direction:column;
     }
 
-    #board{
+    .difficulty-card{
 
-    width:100%;
+        width:92vw;
 
-    max-width:95vw;
+        padding:25px;
+    }
 
-    max-height:95vh;
+    .rules-card{
 
-    aspect-ratio:1;
+        width:95vw;
 
-    height:auto;
-}
-    .cell{
+        padding:25px;
+    }
 
-        border-radius:8px;
+    .win-card{
+
+        width:95vw;
+
+        padding:25px;
     }
 
     .trophy{
@@ -1016,12 +1124,16 @@ button:hover{
 
         font-size:28px;
     }
+
+    .player-name-section input{
+
+        padding:14px;
+
+        font-size:15px;
+    }
 }
 
-/* only landscape */
-/* ==========================================
-   ROTATE DEVICE SCREEN
-========================================== */
+/* ---------- ROTATE DEVICE ---------- */
 
 #rotateDevice{
 
@@ -1041,71 +1153,32 @@ button:hover{
 
     margin-bottom:20px;
 
-    animation:
-    rotatePhone 2s infinite;
+    animation:rotatePhone 2s infinite;
 }
 
 @keyframes rotatePhone{
 
     0%{
 
-        transform:
-        rotate(0deg);
+        transform:rotate(0deg);
     }
 
     50%{
 
-        transform:
-        rotate(90deg);
+        transform:rotate(90deg);
     }
 
     100%{
 
-        transform:
-        rotate(0deg);
+        transform:rotate(0deg);
     }
 }
 
-/* ==========================================
-   MOBILE LANDSCAPE BLOCK
-========================================== */
+/* ---------- FORCE PORTRAIT FOR <=1024 ---------- */
 
 @media screen
 and (max-width:1024px)
 and (orientation:landscape){
-
-    #rotateDevice{
-
-        display:flex;
-
-        position:fixed;
-
-        inset:0;
-
-        z-index:99999;
-
-        background:#ffffff;
-
-        justify-content:center;
-
-        align-items:center;
-    }
-
-    #homeScreen,
-    #gameScreen,
-    #difficultyScreen,
-    #rulesScreen,
-    #winScreen{
-
-        display:none !important;
-    }
-}
-
-@media(
-orientation:portrait
-)
-and
-(max-width:900px){
 
     #rotateDevice{
 
@@ -1122,44 +1195,20 @@ and
         justify-content:center;
 
         align-items:center;
-
-        font-size:24px;
-
-        font-weight:700;
     }
 
-    #gameScreen{
+    #homeScreen,
+    #difficultyScreen,
+    #rulesScreen,
+    #gameScreen,
+    #winScreen{
 
         display:none !important;
     }
 }
-@media (max-width:932px){
 
-    .side-panel h2{
+/* ---------- SAFE AREA ---------- */
 
-        font-size:18px;
-    }
-
-    .player{
-
-        padding:8px;
-    }
-
-    .gameInfo{
-
-        padding:8px;
-
-        font-size:12px;
-    }
-
-    #restartBtn,
-    #homeBtn{
-
-        padding:10px;
-
-        font-size:14px;
-    }
-}
 body{
 
     padding:
@@ -1168,41 +1217,5 @@ body{
     env(safe-area-inset-bottom)
     env(safe-area-inset-left);
 }
-@media screen
-and (max-width:1024px)
-and (orientation:portrait){
 
-    #gameScreen{
 
-        display:flex;
-
-        flex-direction:column;
-    }
-
-    .side-panel{
-
-        width:100%;
-
-        padding:15px;
-    }
-
-    .board-wrapper{
-
-        flex:1;
-
-        display:flex;
-
-        justify-content:center;
-
-        align-items:center;
-    }
-
-    #board{
-
-        width:92vw;
-
-        height:92vw;
-
-        max-width:none;
-    }
-}
